@@ -2,21 +2,20 @@
  * message.h / Assignment / Practicum I
  *
  * Sizhu Qu / CS5600 / Northeastern University
- * Fall 2025 / Nov 14, 2025
+ * Fall 2025 / Nov 15, 2025
  *
  * Description:
- *  This file defines the message structure and functions for managing messages.
+ *  This file define message functions and structures.
  */
 
-#ifndef MESSAGE_H
-#define MESSAGE_H
+#ifndef MESSAGE_H // Include guard start
+#define MESSAGE_H // Include guard define
 
 typedef struct {
     int id;                 // Unique identifier for the message
     char content[1024];     // Content of the message
-} Message;
+} Message; // Message structure definition end
 
-void save_msg(Message* msg, const char* filename);
-int load_msg(Message* msg, const char* filename, int id);
+void init_message(Message *msg, int id, const char *content); // Function to initialize a Message structure
 
 #endif

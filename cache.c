@@ -5,7 +5,7 @@
  * Fall 2025 / Nov 15, 2025
  *
  * References: 
- * 
+ * GeeksforGeeks. (2025, July 11). LIFO (Last-In-First-Out) approach in Programming. GeeksforGeeks. https://www.geeksforgeeks.org/dsa/lifo-last-in-first-out-approach-in-programming/  ￼
  *
  * Description:
  *  This file letting some number of messages are stored in a paged structure in memory. 
@@ -15,14 +15,10 @@
 #include "message.h" // Include message header
 #include "cache.h" // Include cache header
 #include "store.h"
+#include "config.h"
 #include <stdlib.h> // Standard library for memory allocation, process control, conversions, etc.
 #include <string.h> // Standard library for memory functions
 #include <stdio.h> // Standard I/O library
-
-// Define cache size and message size which are powers of 2 
-// and can be modified and can determine the cache capacity.
-#define SIZE 16
-#define MSG 1024
 
 // Use a global cache instance to be accessed by other modules
 Cache cache;
@@ -52,6 +48,7 @@ void add_msg(Message* msg){
     }
 }
 
+// refer: https://www.geeksforgeeks.org/dsa/lifo-last-in-first-out-approach-in-programming/
 // Add a message to cache using LIFO policy
 void add_msg_lifo(Message* msg){
     store_msg(msg, "message.txt"); // Save message to file

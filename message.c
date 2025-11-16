@@ -10,9 +10,10 @@
  */
 #include "message.h"
 #include <string.h>
+#include "config.h"
 
 // Function to initialize a Message structure
 void init_message(Message *msg, int id, const char *content) {
     msg->id = id; // Set message ID
-    strncpy(msg->content, content, 1024); // Copy message content, ensuring no overflow
+    strncpy(msg->content, content, MSG); // Copy message content, ensuring no overflow
 }

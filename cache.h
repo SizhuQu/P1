@@ -12,10 +12,7 @@
 #ifndef CACHE_H // Include guard start
 #define CACHE_H // Include guard define
 #include "message.h" // Include message header
-
-#define SIZE 16
-#define MSG 1024
-
+#include "config.h"
 
 // Define the Cache structure that holds messages
 typedef struct {

@@ -10,10 +10,11 @@
 
 #ifndef MESSAGE_H // Include guard start
 #define MESSAGE_H // Include guard define
+#include "config.h"
 
 typedef struct {
     int id;                 // Unique identifier for the message
-    char content[1024];     // Content of the message
+    char content[MSG];     // Content of the message
 } Message; // Message structure definition end
 
 void init_message(Message *msg, int id, const char *content); // Function to initialize a Message structure

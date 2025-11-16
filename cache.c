@@ -12,10 +12,7 @@
  *  The messages must be a fixed size; the choice of size should be a power of 2.
  */
 
-#include "message.h" // Include message header
 #include "cache.h" // Include cache header
-#include "store.h"
-#include "config.h"
 #include <stdlib.h> // Standard library for memory allocation, process control, conversions, etc.
 #include <string.h> // Standard library for memory functions
 #include <stdio.h> // Standard I/O library
@@ -39,12 +36,18 @@ void add_msg(Message* msg){
         cache.messages[index] = msg; // Add message to cache
         cache.count++; // Increment message count
         printf("Message added. Current count: %d\n", cache.count);
-
     } else {
-        int random_number = rand(); // Generate a random number
-        int index = random_number % SIZE; // Get a random index in the cache
-        cache.messages[index] = msg; // Replace the message at the random index
-        printf("Cache is full. Replaced message at index: %d\n", index);
+        int index = rand() % SIZE;  // Randomly select an index to replace
+    
+        // Print which message was replaced
+        if (cache.messages[index] != NULL) { // If there is a message at that index
+            printf("Cache is full, Replacing OLD message id=%d at index=%d with NEW id=%d\n",
+                cache.messages[index]->id, index, msg->id); // Print replaced message info
+        } else {
+            printf("Cache is full → Replacing empty slot at index=%d with id=%d\n",
+                index, msg->id);
+        }
+        cache.messages[index] = msg;  // Replace that message
     }
 }
 

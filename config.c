@@ -1,5 +1,5 @@
 /*
- * cache.c / Assignment / Practicum I
+ * config.c / Assignment / Practicum I
  *
  * Sizhu Qu / CS5600 / Northeastern University
  * Fall 2025 / Nov 15, 2025

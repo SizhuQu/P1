@@ -10,7 +10,6 @@
  */
 #include "message.h"
 #include <string.h>
-#include "config.h"
 
 // Function to initialize a Message structure
 void init_message(Message *msg, int id, const char *content) {

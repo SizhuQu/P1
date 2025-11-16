@@ -64,3 +64,4 @@ int retrieve_msg(int id, const char* filename, Message* msg_out) {
 
     fclose(fp); // Close the file if message not found
     return -1; // Return -1 to indicate message not found
+}

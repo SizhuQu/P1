@@ -14,6 +14,8 @@
 #include "message.h" // Include message header
 #include "config.h"
 
+extern Cache cache; // External declaration of the cache instance
+
 // Define the Cache structure that holds messages
 typedef struct {
     Message* messages[SIZE]; // Array to hold pointers to messages

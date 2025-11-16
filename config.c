@@ -11,11 +11,8 @@
 #include "config.h"
 #include <stdio.h>
 
-int SIZE = 16;    // Number of messages in cache
-int MSG = 1024;  // Size of each message
-
 // Function to initialize configuration settings
 void init_config() {
-    printf("Configuration: Cache Size = %d, Message Size = %d\n", SIZE, MSG);
+    printf("Configuration loaded: SIZE=%d, MSG=%d\n", SIZE, MSG);
 }
 

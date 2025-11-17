@@ -99,6 +99,27 @@ void run_tests() {
         printf("LIFO replacement FAILED. Last slot ID is %d (expected 400).\n", after_id);
     }
 
+    // Test case 8: check out of memory handling
+    printf("---------------Running Test Case 8: Check out of memory handling.---------------\n");
+    Message *oom_msg = malloc(sizeof(Message) * 100000000); // Attempt to allocate a very large amount of memory
+    if (oom_msg == NULL) { // if allocation fails, malloc returns NULL
+        printf("Out-of-memory simulation SUCCESS: malloc returned NULL.\n");
+    } else {
+        printf("Out-of-memory simulation FAILED.\n");
+        free(oom_msg);
+    }
+
+    // Test case 9: check out of disk handling
+    printf("---------------Running Test Case 9: Check out of disk handling.---------------\n");
+    printf("Attempting to write to a non-existent directory to simulate out-of-disk.\n");
+    FILE *fp = fopen("/NonExistentDirectory/testfile.txt", "w"); // Attempt to open a file in a non-existent directory
+    if (fp == NULL) { // if file opening fails, fopen returns NULL
+        printf("Out-of-disk simulation SUCCESS.\n");
+    } else {
+        printf("Out-of-disk simulation FAILED.\n");
+        fclose(fp);
+    }
+
     //----------- Evaluation: 1000 random accesses ---------------
     printf("----------------Starting Evaluation: 1000 random accesses.----------------\n");
     quiet_mode = 1;   // turn off prints during evaluation

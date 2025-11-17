@@ -18,7 +18,7 @@ OBJS = $(SRCS:.c=.o)
 TARGET = practicum1
 
 # Tarball name
-TARFILE = Qu-SizhuQu-CS5600-Practicum1.tar
+TARFILE = Qu-CS5600-Practicum1.tar
 
 # Default target
 all: $(TARGET)
@@ -33,7 +33,7 @@ $(TARGET): $(OBJS)
 
 # Clean build files
 clean:
-	rm -f $(OBJS) $(TARGET) *.txt
+	rm -f $(OBJS) $(TARGET) *.txt *.tar
 
 # Run program
 run: $(TARGET)

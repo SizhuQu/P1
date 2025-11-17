@@ -31,14 +31,32 @@ int main() {
     // define messages which will be added to cache
     Message *msg1 = (Message *)malloc(sizeof(Message)); // Allocate memory for message 1
     msg1->id = 1; // Set message ID 1
+    // check if out of memory
+    if (msg1 == NULL) {
+        fprintf(stderr, "Memory allocation failed for msg1\n");
+        return -1; // Exit if memory allocation fails
+    }
     strcpy(msg1->content, "Hello, Message 1!");  // Set message content
 
     Message *msg2 = (Message *)malloc(sizeof(Message)); // Allocate memory for message 2
     msg2->id = 2; // Set message ID 2
+    // check if out of memory
+    if (msg2 == NULL) {
+        fprintf(stderr, "Memory allocation failed for msg2\n");
+        free(msg1); // Free previously allocated memory
+        return -1; // Exit if memory allocation fails
+    }
     strcpy(msg2->content, "Hello, Message 2!");  // Set message content
 
     Message *msg3 = (Message *)malloc(sizeof(Message)); // Allocate memory for message 3
     msg3->id = 3; // Set message ID 3
+    // check if out of memory
+    if (msg3 == NULL) {
+        fprintf(stderr, "Memory allocation failed for msg3\n");
+        free(msg1); // Free previously allocated memory
+        free(msg2); // Free previously allocated memory
+        return -1; // Exit if memory allocation fails
+    }
     strcpy(msg3->content, "Hello, Message 3!");  // Set message content
 
     // Add messages to cache

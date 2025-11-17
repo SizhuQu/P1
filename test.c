@@ -18,52 +18,59 @@
 
 // Function to run test cases
 void run_tests() {
-    printf("Start to run tests.\n");
+    printf("-------Start to run tests.----------\n");
     init_config(); // Initialize configuration
     init_cache();  // Initialize cache
     printf("Configuration and Cache initialized.\n");
 
     // Test case 1: Create and store a message to cache
+    printf("----------Running Test Case 1: Add message to cache.----------\n");
     Message *msg1 = (Message *)malloc(sizeof(Message)); // Allocate memory for message
     init_message(msg1, 123, "Test message for cache."); // Initialize message
     add_msg(msg1); // Add message to cache
-    printf("Test Case 1: Message with ID %d added to cache.\n", msg1->id); // Verify addition
+    printf("Message with ID %d added to cache.\n", msg1->id); // Verify addition
 
     // Test case 2: Retrieve message from cache
+    printf("-------------Running Test Case 2: Retrieve message from cache.-------------\n");
     Message *the_msg = lookup_msg(123); // Look up message by ID
     if (the_msg != NULL) {
-        printf("Test Case 2: Retrieved message from cache: ID=%d, Content=%s\n", the_msg->id, the_msg->content);
+        printf("Retrieved message from cache: ID=%d, Content=%s\n", the_msg->id, the_msg->content);
     }
 
     // Test case 3: Store message to file
+    printf("----------------Running Test Case 3: Store message to file.----------------\n");
     Message file_msg; // Define a message variable
     init_message(&file_msg, 456, "Test message for file."); // Initialize message
     store_msg(&file_msg, "test_message.txt"); // Store message to file
-    printf("Test Case 3: Message with ID %d stored to file.\n", file_msg.id); // Verify storage
+    printf("Message with ID %d stored to file.\n", file_msg.id); // Verify storage
 
     // Test case 4: Retrieve message from file
+    printf("-----------------Running Test Case 4: Retrieve message from file.-----------------\n");
     Message re_msg; // Variable to hold retrieved message
     int out_msg = retrieve_msg(456, "test_message.txt", &re_msg); // Retrieve message by ID
     if (out_msg == 0) { // Check if retrieval was successful
-        printf("Test Case 4: Retrieved message from file: ID=%d, Content=%s\n", re_msg.id, re_msg.content);
+        printf("Retrieved message from file: ID=%d, Content=%s\n", re_msg.id, re_msg.content);
     }
 
     // Test case 5: Attempt to retrieve non-existent message
+    printf("-----------------Running Test Case 5: Attempt to retrieve non-existent message.-------------------\n");
     Message *no_msg = lookup_msg(999); // Look up non-existent message
     if (no_msg == NULL) {
-        printf("Test Case 5: Message with ID 999 not found.\n");
+        printf("Message with ID 999 not found.\n");
     }
 
     // Test case 6: replace message 
+    printf("---------------Running Test Case 6: Test cache replacement policy.---------------\n");
     for (int i = 0; i < SIZE + 1; i++) { // Add SIZE + 1 messages is to trigger replacement
         Message *fill_msg = (Message *)malloc(sizeof(Message)); // Allocate memory for message
         fill_msg->id = 200 + i; // Set message ID
         strcpy(fill_msg->content, "Message for replacement test"); // Set message content
         add_msg(fill_msg); // Add message to cache
     }
-    printf("Test Case 6: Added %d messages to cache to test replacement.\n", SIZE + 1);
+    printf("Added %d messages to cache to test replacement.\n", SIZE + 1);
 
     // Test case 7: LIFO replacement
+    printf("------------------Running Test Case 7: Test LIFO cache replacement policy.------------------\n");
     init_cache(); // Re-initialize cache to empty
 
     for (int i = 0; i < SIZE; i++) { 
@@ -87,17 +94,15 @@ void run_tests() {
     printf("After LIFO replace: last ID = %d\n", after_id); // Look up the last message added after replacement
 
     if (after != NULL && after_id == 400) { // Check if the last message is the new one with ID 400
-        printf("Test Case 7: LIFO replacement SUCCESS. Last slot replaced by ID 400.\n");
+        printf("LIFO replacement SUCCESS. Last slot replaced by ID 400.\n");
     } else {
-        printf("Test Case 7: LIFO replacement FAILED. Last slot ID is %d (expected 400).\n", after_id);
+        printf("LIFO replacement FAILED. Last slot ID is %d (expected 400).\n", after_id);
     }
 
     //----------- Evaluation: 1000 random accesses ---------------
+    printf("----------------Starting Evaluation: 1000 random accesses.----------------\n");
     quiet_mode = 1;   // turn off prints during evaluation
     init_cache(); // Re-initialize cache to empty
-
-    printf("Starting Evaluation: 1000 random accesses.\n");
-
     // Fill the cache initially again
     for (int i = 0; i < SIZE; i++) { // Fill the cache initially
         Message *Ev_msg = malloc(sizeof(Message)); // Allocate memory for message
@@ -129,9 +134,9 @@ void run_tests() {
 
 
     //----------- Evaluation: 1000 LIFO accesses ---------------
+    printf("------------------Starting Evaluation: 1000 LIFO accesses.------------------\n");
     quiet_mode = 1;   // turn off prints during evaluation
     init_cache(); // Re-initialize cache to empty
-    printf("Starting Evaluation: 1000 LIFO accesses.\n");
 
     // Fill the cache initially again
     for (int i = 0; i < SIZE; i++) { // Fill the cache initially
@@ -163,5 +168,5 @@ void run_tests() {
     printf("Hit Ratio: %.2f%%\n", (lifo_hits * 100.0) / totals);    
 
 
-    printf("All tests completed.\n");
+    printf("-------------All tests completed.-------------\n");
 }

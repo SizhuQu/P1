@@ -37,7 +37,7 @@ void add_msg(Message* msg){
         int index = cache.count; // Get the index to add the new message
         cache.messages[index] = msg; // Add message to cache
         cache.count++; // Increment message count
-        printf("Message added. Current count: %d\n", cache.count);
+        if (!quiet_mode) printf("Message added. Current count: %d\n", cache.count);
     } else {
         int index = rand() % SIZE;  // Randomly select an index to replace
     
@@ -63,12 +63,12 @@ void add_msg_lifo(Message* msg){
         int index = cache.count;  // Get the index to add the new message
         cache.messages[index] = msg; // Add message to cache
         cache.count++;  // Increment message count by 1
-        printf("Message added LIFO. Count: %d\n", cache.count);
+        if (!quiet_mode) printf("Message added LIFO. Count: %d\n", cache.count);
 
     } else { // If cache is full, throw out the last added message
         int index = SIZE - 1; // Index of the last message 
         cache.messages[index] = msg; // Replace the last message
-        printf("Cache is full. Replaced last message at index: %d\n", index);
+        if (!quiet_mode) printf("Cache is full. Replaced last message at index: %d\n", index);
     }
 }   
     

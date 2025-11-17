@@ -22,10 +22,12 @@ void run_tests(); // Run the test file
 
 // Main function of the program
 int main() {
+    printf("-------This is the main file to run the program.----------\n");
     init_config(); // Initialize configuration settings
     init_cache();  // Initialize the cache
     printf("Program initialized successfully.\n");
 
+    printf("-------Adding messages to cache and file.----------\n");
     // define messages which will be added to cache
     Message *msg1 = (Message *)malloc(sizeof(Message)); // Allocate memory for message 1
     msg1->id = 1; // Set message ID 1
@@ -44,35 +46,45 @@ int main() {
     add_msg(msg2); // Add message 2 to cache
     add_msg(msg3); // Add message 3 to cache
 
+    printf("-------Messages added to cache.----------\n");
+
+    printf("-------Testing message retrieval from cache and file.----------\n");
     // writing a direct message to file
+    printf("Storing a message directly to file (ID=4).\n");
     Message file_msg; // Define a message variable
     file_msg.id = 4;    // Set message ID 4 and directly store to file                           
     strcpy(file_msg.content, "This is disk message."); // Set message content
     store_msg(&file_msg, "message.txt");   // Store the message to file
 
     // Retrieve a message existing on cache
+    printf("-------Attempting to retrieve a message existing on cache (ID=2).----------\n");
     Message *have_msg = lookup_msg(2); // Look up message with ID 2 in cache
     if (have_msg != NULL) { // If message is found
         printf("Message found in cache: ID=%d, Content=%s\n", have_msg->id, have_msg->content);
     }
 
     // Retrieve a message not in cache but in file
+    printf("-------Attempting to retrieve a message not in cache but in file (ID=4).----------\n");
     Message *have_file = lookup_msg(4); // Look up message with ID 4 in cache
     if (have_file != NULL) { // If message is found
         printf("Message found in file: ID=%d, Content=%s\n", have_file->id, have_file->content);
     }   
 
     // Retrieve a message not existing
+    printf("-------Attempting to retrieve a non-existent message (ID=5).----------\n");
     Message *no_msg = lookup_msg(5); // Look up message with ID 5 in cache
     if (no_msg == NULL) { // If message is not found
         printf("Message with ID=5 not found in cache or file.\n");
     }
 
     // Free allocated memory for messages
+    printf("-------Freeing allocated memory for messages.----------\n");
     free(msg1);
     free(msg2);
     free(msg3); 
-
+    printf("Memory freed successfully.\n");
+    printf("------------------------------------------------------------\n");
+    printf("-------Running test cases from test.c.----------\n");
     run_tests(); // Run test cases in the test.c file
 
     return 0; // execution successful. 

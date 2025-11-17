@@ -109,12 +109,12 @@ void run_tests() {
     int miss = 0; // Initialize miss counter
     int totals = 1000; // Total number of accesses
 
-    // 1000 random repleacement accesses
+    // 1000 random replacement accesses
     for (int i = 0; i < totals; i++) { // Loop for 1000 accesses
         int random_id = rand() % (SIZE * 2); // Generate random ID between 0 and SIZE*2
         Message *random_msg = lookup_msg(random_id); // Look up message by random ID
         // Count hits and misses
-        if (random_msg != NULL) { // If message is found
+        if (random_id < SIZE && random_msg != NULL) { // If message is found
             hits++; // Increment hit counter if message is found
         } else {
             miss++; // Increment miss counter if message is not found
@@ -144,14 +144,14 @@ void run_tests() {
 
     // 1000 LIFO replacement accesses for evaluation 
     for (int i = 0; i < totals; i++) { // Loop for 1000 accesses
-        int random_id = 1000 + (rand() % (SIZE * 2)); // Generate random ID between 1000 and 1000 + SIZE*2
+        int random_id = rand() % (SIZE * 2); // Generate random ID between 1000 and 1000 + SIZE*2
 
         Message *found = lookup_msg(random_id); // Look up message by random ID
 
-        if (found != NULL) { // If message is found
+        if (random_id < SIZE && found != NULL) { // If message is found
             lifo_hits++; // Increment LIFO hit counter
         } else {
-            lifo_miss++;
+            lifo_miss++; // Increment LIFO miss counter
         }
     }
 

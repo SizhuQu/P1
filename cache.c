@@ -84,16 +84,22 @@ Message* lookup_msg(int id) {
     }
     printf("Message with ID %d not found in cache.\n", id);
 
-    // If not found, check if the message is in the cache miss
-    // have to use static since to prevent mass up with local variable
-    static Message temp; // avoid returning address of local variable so use static temparary variable
+    // If not found in cache, try to load from file 
+    Message *from_disk = (Message *)malloc(sizeof(Message)); // Allocate memory for message from disk
+    if (from_disk == NULL) { // Check for memory allocation failure
+        fprintf(stderr, "Memory allocation failed\n");
+        return NULL;
+    } 
 
     // if not found in cache, try to load from file
-    if (retrieve_msg(id, "message.txt", &temp) == 0) { // If retrieve_msg is successful
+    if (retrieve_msg(id, "message.txt", from_disk) == 0) { // If message is found in file
         printf("Message with ID %d loaded from file.\n", id);
-        return &temp; // Return the loaded message pointer
+
+        add_msg(from_disk); // Add the loaded message to cache
+        return from_disk; // Return the loaded message pointer
     } else {
         printf("Message with ID %d not found in file.\n", id);
+        free(from_disk); // Free allocated memory if not found
         return NULL; // Message not found
     }
 }

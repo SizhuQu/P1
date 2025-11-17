@@ -20,6 +20,8 @@
 // Use a global cache instance to be accessed by other modules
 Cache cache;
 
+int quiet_mode = 0; // Global variable for quiet mode
+
 // Initialize cache to be empty
 void init_cache() {
     cache.count = 0; // Set message count to 0
@@ -78,11 +80,11 @@ Message* lookup_msg(int id) {
     for (int i = 0; i < cache.count; i++) {
         Message *current = cache.messages[i]; // Get the current message pointer
         if (current != NULL && current->id == id) { // if the ID matches the requested ID
-            printf("Message with ID %d found at index %d.\n", id, i);
+            if (!quiet_mode) printf("Message with ID %d found at index %d.\n", id, i);
             return current; // Return the current message pointer
         }
     }
-    printf("Message with ID %d not found in cache.\n", id);
+    if (!quiet_mode) printf("Message with ID %d not found in cache.\n", id);
 
     // If not found in cache, try to load from file 
     Message *from_disk = (Message *)malloc(sizeof(Message)); // Allocate memory for message from disk
@@ -93,12 +95,12 @@ Message* lookup_msg(int id) {
 
     // if not found in cache, try to load from file
     if (retrieve_msg(id, "message.txt", from_disk) == 0) { // If message is found in file
-        printf("Message with ID %d loaded from file.\n", id);
+        if (!quiet_mode) printf("Message with ID %d loaded from file.\n", id);
 
         add_msg(from_disk); // Add the loaded message to cache
         return from_disk; // Return the loaded message pointer
     } else {
-        printf("Message with ID %d not found in file.\n", id);
+        if (!quiet_mode) printf("Message with ID %d not found in file.\n", id);
         free(from_disk); // Free allocated memory if not found
         return NULL; // Message not found
     }

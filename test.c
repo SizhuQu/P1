@@ -93,6 +93,7 @@ void run_tests() {
     }
 
     //----------- Evaluation: 1000 random accesses ---------------
+    quiet_mode = 1;   // turn off prints during evaluation
     init_cache(); // Re-initialize cache to empty
 
     printf("Starting Evaluation: 1000 random accesses.\n");
@@ -128,6 +129,7 @@ void run_tests() {
 
 
     //----------- Evaluation: 1000 LIFO accesses ---------------
+    quiet_mode = 1;   // turn off prints during evaluation
     init_cache(); // Re-initialize cache to empty
     printf("Starting Evaluation: 1000 LIFO accesses.\n");
 

@@ -18,7 +18,7 @@
 
 // Since test.c is a separate file and this is main.c
 // it's better to run the test cases from here.
- void run_tests(); // Run the test file
+void run_tests(); // Run the test file
 
 // Main function of the program
 int main() {

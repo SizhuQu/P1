@@ -13,14 +13,16 @@
 #define CACHE_H // Include guard define
 #include "message.h" // Include message header
 #include "config.h"
-
-extern Cache cache; // External declaration of the cache instance
+#include "store.h"
 
 // Define the Cache structure that holds messages
 typedef struct {
     Message* messages[SIZE]; // Array to hold pointers to messages
     int count;            // Current number of messages in the cache
 } Cache;                   // Cache structure definition end
+
+extern Cache cache; // External declaration of the cache instance
+extern int quiet_mode; // External declaration for quiet mode
 
 void init_cache(); // Initialize the cache
 void add_msg(Message* msg);  // Add a message to cache
